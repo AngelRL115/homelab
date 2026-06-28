@@ -1,0 +1,30 @@
+name: adminer
+
+services:
+  adminer:
+    image: adminer:5.3.0
+    container_name: adminer
+
+    restart: unless-stopped
+
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+    ports:
+      - "${ADMINER_PORT}:8080"
+
+    networks:
+      - homelab-network
+
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "http://localhost:8080"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+networks:
+  homelab-network:
+    external: true
