@@ -67,25 +67,32 @@ Cada servicio instalado debe cumplir con los siguientes principios:
 
 # Estado del proyecto
 
-## Infraestructura
+## Fase 1 y 2 — Infraestructura y Servicios Esenciales (Completadas)
 
 - [x] Ubuntu sobre WSL2
-- [x] Docker Engine
-- [x] Docker Compose
-- [x] Docker Network
-- [x] Portainer
-- [x] PostgreSQL
+- [x] Docker Engine & Docker Compose
+- [x] Red Docker personalizada (`homelab-network`)
+- [x] Portainer (Gestión de contenedores)
+- [x] PostgreSQL (Base de datos relacional)
+- [x] Adminer (Gestión de DB web)
+- [x] Redis (Caché y almacén en memoria)
+- [x] Nginx Proxy Manager (Reverse Proxy & dominios `.homelab.local`)
+- [x] Uptime Kuma (Monitoreo de infraestructura 24/7)
+- [x] MinIO (Almacenamiento de objetos S3)
 
-## Próximos servicios
+## Fase 3 — Acondicionamiento de Plataforma PaaS (En Progreso)
 
-- [ ] Adminer
-- [ ] Redis
-- [ ] Nginx Proxy Manager
-- [ ] Uptime Kuma
-- [ ] MinIO
-- [ ] Grafana
-- [ ] Prometheus
-- [ ] Loki
+- [ ] Galería de plantillas de arquitectura reutilizables (`templates/`)
+- [ ] Acceso remoto seguro sin abrir puertos (Tailscale / Cloudflare Tunnel)
+- [ ] Infraestructura base de automatización y CI/CD (Runner workspace)
+- [ ] Librería de scripts operativos de mantenimiento y respaldos (`scripts/`)
+
+## Fase 4 — Servicios de Observabilidad Avanzada y Aplicaciones
+
+- [ ] Despliegue de Aplicaciones Propias o Herramientas Open Source
+- [ ] Grafana (Dashboards avanzados)
+- [ ] Prometheus (Métricas de sistema)
+- [ ] Loki (Centralización de logs)
 
 ---
 

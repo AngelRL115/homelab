@@ -1,0 +1,36 @@
+name: uptime-kuma
+
+services:
+  uptime-kuma:
+    image: ${UPTIME_KUMA_IMAGE}
+    container_name: uptime-kuma
+    restart: unless-stopped
+
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+    ports:
+      - "${UPTIME_KUMA_PORT}:3001"
+
+    volumes:
+      - uptime_kuma_data:/app/data
+
+    networks:
+      - homelab-network
+
+    healthcheck:
+      test: ["CMD-SHELL", "node extra/healthcheck.js || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+volumes:
+  uptime_kuma_data:
+
+networks:
+  homelab-network:
+    external: true

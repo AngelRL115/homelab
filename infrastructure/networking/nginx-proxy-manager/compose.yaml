@@ -1,0 +1,43 @@
+name: nginx-proxy-manager
+
+services:
+  app:
+    image: ${NPM_IMAGE}
+    container_name: nginx-proxy-manager
+    restart: unless-stopped
+
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+    ports:
+      - "${NPM_HTTP_PORT}:80"
+      - "${NPM_ADMIN_PORT}:81"
+      - "${NPM_HTTPS_PORT}:443"
+
+    environment:
+      TZ: ${TZ}
+
+    volumes:
+      - npm_data:/data
+      - npm_letsencrypt:/etc/letsencrypt
+
+    networks:
+      - homelab-network
+
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:81/ || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+volumes:
+  npm_data:
+  npm_letsencrypt:
+
+networks:
+  homelab-network:
+    external: true
